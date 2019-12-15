@@ -161,7 +161,7 @@ p[0] = 2
 c = Intcode.new(p)
 
 grid = {}
-# puts "\e[?25l"
+puts "\e[?25l"
 until c.state == :halted
   c.step
   next unless c.outputs.size == 3 || [:halted, :awaiting_input].include?(c.state)
@@ -173,12 +173,12 @@ until c.state == :halted
   end
 
   if c.state == :awaiting_input
-    # puts "\e[H\e[2J"
-    # draw_grid(grid)
-    # sleep(0.01)
+    puts "\e[H\e[2J"
+    draw_grid(grid)
+    sleep(0.01)
     c.inputs << get_input(grid)
   end
 end
-# puts "\e[0H\e[0J\e[?25h"
+puts "\e[0H\e[0J\e[?25h"
 
 puts grid[[-1, 0]]
